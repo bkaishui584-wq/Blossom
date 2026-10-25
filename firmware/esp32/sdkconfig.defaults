@@ -1,0 +1,14 @@
+# 串口上只跑 JSON 协议。
+#
+# 把 IDF 自己的控制台关掉，UART0 就完全归应用所有，日志不会和协议混在一条线上。
+# 需要看日志时，把这一行换成 CONFIG_ESP_CONSOLE_UART_DEFAULT=y，日志会跟协议挤在
+# 同一条线上；那样电脑端会把日志行当成看不懂的行记一笔，功能不受影响但不干净。
+CONFIG_ESP_CONSOLE_UART_NONE=y
+CONFIG_LOG_DEFAULT_LEVEL_WARN=y
+
+# 主任务要跑串口解析，默认栈有点紧。
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=6144
+
+# 任务看门狗：卡死了要能自己复位，别让舵机停在一个危险位置不动。
+CONFIG_ESP_TASK_WDT_TIMEOUT_S=10
+CONFIG_ESP_TASK_WDT_PANIC=y

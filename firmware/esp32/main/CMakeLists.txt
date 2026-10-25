@@ -1,0 +1,9 @@
+idf_component_register(
+    SRCS
+        "app_main.c"
+        "commands.c"
+        "drivers.c"
+        "json_wire.c"
+    INCLUDE_DIRS
+        "."
+)
